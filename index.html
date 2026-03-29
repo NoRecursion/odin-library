@@ -17,7 +17,7 @@
     <div class="topbar">
         <h1>My Library</h1>
     </div>
-    <div class="card-container">
+    <div class="card-container" id="card-container">
         <div class="card">
             <button class="close"></button>
             <h2 class="title">The Great Gatsby</h2>
@@ -30,5 +30,15 @@
         </div>
 
     </div>
+
+<template id="card-template">
+    <div class="card">
+        <button class="close"></button>
+        <h2 class="title"></h2>
+        <p class="author"></p>
+        <p class="page-count"></p>
+        <button class="status"></button>
+    </div>
+</template>
 </body>
 </html>

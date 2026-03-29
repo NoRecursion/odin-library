@@ -155,7 +155,7 @@ body{
             content: "read";
         }
     }
-    &.not-read::after{
+    &:not(.read)::after{
         content: "not read";
     }
 }
