@@ -3,6 +3,9 @@ import * as library from "./utils/library.js";
 const card_container = document.querySelector("#card-container");
 const card_template = document.querySelector("#card-template");
 const card_adder = document.querySelector("#add-card");
+const dialog = card_adder.querySelector("dialog");
+const add_form = dialog.querySelector("form")
+
 
 function createCard(book) {
     const card = card_template.content.cloneNode(true);
@@ -39,8 +42,15 @@ function displayCards(){
     card_container.appendChild(card_adder);
 }
 
-displayCards()
 
-for (const book in library.listBooks()){
-    console.log(book);
-}
+card_adder.querySelector(".add-card-btn").onclick = ()=>{dialog.show()}
+card_adder.querySelector(".close").onclick = ()=>{dialog.close(); add_form.reset();}
+
+add_form.addEventListener("submit", (e)=>{
+    const data = new FormData(add_form);
+    library.addBook(data.get("title"),data.get("author"),data.get("pages"),data.get("read") === "on");
+    add_form.reset();
+    displayCards();
+})
+
+displayCards();

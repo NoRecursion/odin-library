@@ -48,14 +48,17 @@ button{
 button{
     color: rgb(50, 50, 50);
     background-color: rgb(245, 250, 255);
-    border: 2.5px solid rgba(0, 0, 0, 0.25)
+    border: 2.5px solid rgba(0, 0, 0, 0.25);
+
+    &:hover{
+        box-shadow: rgb(0, 136, 255) 0 0 5px;
+    }
 }
 
 body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    width: 100vw;
 }
 
 .topbar{
@@ -64,7 +67,7 @@ body{
     background-color: orange;
     padding: 20px;
     padding-left: 55px;
-    font-size: 30pt;
+    font-size: 24pt;
 }
 
 .card-container{
@@ -77,7 +80,7 @@ body{
     place-items: center left;
     gap: 50px;
     grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
-    grid-auto-rows: 370px;
+    grid-auto-rows: 350px;
     grid-auto-flow: row;
 }
 
@@ -85,7 +88,7 @@ body{
 .pseudocard{
     background-color: rgb(245, 197, 137);
     width: 325px;
-    height: 375px;
+    height: 350px;
     border-radius: 30px;
     border-left: 10px solid rgb(252, 169, 91);
     padding: 50px;
@@ -93,13 +96,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    *{
-        line-height: 1;
-        height: max-content;
-    }
-}
 
-.card{
     position: relative;
 
     .close{
@@ -113,9 +110,18 @@ body{
             content: "\00D7"; /* × */
         }
     }
+}
+
+.card{
+
 
     &:has(.read){
         border-color: rgb(176, 116, 60);
+    }
+
+    *{
+        line-height: 1;
+        height: max-content;
     }
 }
 
@@ -134,7 +140,9 @@ body{
         content: " pages";
     }   
 }
-.status{
+.status,
+.confirm{
+    line-height: 1;
     color: black;
     border: none;
     box-sizing: content-box;
@@ -145,7 +153,9 @@ body{
     width: max-content;
     align-self: center;
     width: 150px;
+}
 
+.status{
     &::before{
         content: "status: "
     }
@@ -165,15 +175,65 @@ body{
     align-items: center;
     justify-content: center;
 
-    button::before {
+    .add-card-btn::before {
         content: "\271A";   /* large + symbol */
         line-height: 1.95;
     }
 
-    button{
+    .add-card-btn{
         width: 80px;
         height: 80px;
         border-radius: 50%;
         font-size: 30pt;
+
+        &:has(~dialog[open]){
+            display: none;
+        }
+    }
+
+}
+
+dialog{
+    outline: none;
+    background-color: transparent;
+    border: none;
+    position: static;
+    width: 100%;
+    padding: 0;
+    margin:0;
+
+
+    align-self: stretch;
+    flex: 1; 
+
+    *{
+        max-width: 100%;
+    }
+
+}
+
+form{    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+
+    input[type="number"],
+    input[type="text"]{
+        padding-left: 0.5em;
+        border-radius: 8px;
+    }
+
+    label:has(input[type="checkbox"]){
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 10px;
+    }
+
+    input[type="checkbox"]{
+        height: 25px;
+        width: 25px;
     }
 }

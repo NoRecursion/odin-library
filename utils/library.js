@@ -35,4 +35,3 @@ export const listBooks = Map.prototype.values.bind(bookMap);
 addBook("The Great Gatsby", "F. Scott Fitzgerald",240,true);
 addBook("Pride and Prejudice","Jane Austen",464, false);
 addBook("The Stranger", "Albert Camus",152, true );
-
