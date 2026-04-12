@@ -1,4 +1,6 @@
-import * as library from "./utils/library.js";
+import {Library} from "./utils/library.js";
+
+const lib = new Library(Library.basicBooks);
 
 const card_container = document.querySelector("#card-container");
 const card_template = document.querySelector("#card-template");
@@ -25,7 +27,7 @@ function createCard(book) {
     card.id = book.id;
 
     card.querySelector(".close").onclick = (e)=>{
-        library.delBook(book.id);
+        lib.delBook(book.id);
         displayCards();
     }
 
@@ -34,7 +36,7 @@ function createCard(book) {
 
 function displayCards(){
     card_container.replaceChildren();
-    for (const book of library.listBooks()){
+    for (const book of lib.makeIterator()){
         const card = createCard(book);
         card_container.appendChild(card);
         
@@ -48,7 +50,7 @@ card_adder.querySelector(".close").onclick = ()=>{dialog.close(); add_form.reset
 
 add_form.addEventListener("submit", (e)=>{
     const data = new FormData(add_form);
-    library.addBook(data.get("title"),data.get("author"),data.get("pages"),data.get("read") === "on");
+    lib.addBook(data.get("title"),data.get("author"),data.get("pages"),data.get("read") === "on");
     add_form.reset();
     displayCards();
 })
